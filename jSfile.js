@@ -7,42 +7,45 @@
 const button = document.createElement("button");
 button.textContent = "Click me for the size of the gird to sketch on!";
 
+const divContainer = document.createElement("div");
+divContainer.setAttribute("id", "container");
+var userInput = 0; //defaut number
+
 button.addEventListener("click", function() {
-    const userInput = prompt("Enter number of squares per side: ");
-    if(userInput === null || userInput === "" || Number.isNaN(userInput) === false)
+    userInput = parseInt(prompt("Enter number of squares per side: "));
+    if(userInput !== null && userInput !== "" && Number.isInteger(userInput) === true && userInput > 0)
     {
-        alert("Please enter a valid number");
+        createGrid(userInput);
     } 
     else
     {
-        const numberOfSquares = parseInt(userInput);
-        if(numberOfSquares < 0) {
-            alert("Please enter a positive whole number");
-        }
+        alert("Please enter a valid number");
     }
 })
 
+function createGrid(size){
+    // Clear existing grid
+    divContainer.innerHTML = "";
 
-const divContainer = document.createElement("div");
-divContainer.setAttribute("id", "container");
-
-for (var i = 0; i < 16*16; i++)
-{
-    // for(var j = 0; j < 16; j++)
-    // {
-    const gridSquare = document.createElement("div");
-    gridSquare.setAttribute("id", "grid");
-    divContainer.appendChild(gridSquare);
-    gridSquare.addEventListener("mouseover", function() {
-        this.style.backgroundColor = "blue"; //using "this" to refer to current gridSquare
-    })
-    
-    // gridSquare.addEventListener("mouseout", function() {
-    //     this.style.backgroundColor = "white";
-    // })
-    //}
+    for (var i = 0; i < userInput; i++)
+    {
+        for(var j = 0; j < 16; j++)
+        {
+            const gridSquare = document.createElement("div");
+            gridSquare.setAttribute("id", "grid");
+            divContainer.appendChild(gridSquare);
+            gridSquare.addEventListener("mouseover", function() {
+                this.style.backgroundColor = "black"; //using "this" to refer to current gridSquare
+            })
+        }
+        // gridSquare.addEventListener("mouseout", function() {
+        //     this.style.backgroundColor = "white";
+        // })
+        //}
+    }
 }
 
+createGrid(userInput);
 
 document.body.append(button);
 document.body.append(divContainer);

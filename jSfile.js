@@ -35,7 +35,11 @@ function createGrid(size){
             gridSquare.setAttribute("id", "grid");
             divContainer.appendChild(gridSquare);
             gridSquare.addEventListener("mouseover", function() {
-                this.style.backgroundColor = "black"; //using "this" to refer to current gridSquare
+                //implemented a random rgb colour each time you hover over a square in the grid
+                const randomR = Math.floor(Math.random() * 256);
+                const randomG = Math.floor(Math.random() * 256);
+                const randomB = Math.floor(Math.random() * 256);
+                this.style.backgroundColor = `rgb(${randomR},${randomG},${randomB})`; //using "this" to refer to current gridSquare
             })
         }
         // gridSquare.addEventListener("mouseout", function() {
